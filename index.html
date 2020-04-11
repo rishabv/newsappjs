@@ -81,49 +81,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-    <!-- <script src="index.js"></script> -->
-    <script>
-        let source = `google-news-in`;
+    <script src="index.js"></script>
 
-        let apikey = '8cb0f8f82d0045e2b96123e00715f730'
-
-        let newsAccordian = document.getElementById('accordionExample');
-        let card = document.getElementById('card')
-        const xhr = new XMLHttpRequest();
-
-        xhr.open('GET', `http://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${apikey}`, true)
-        xhr.onload = function () {
-            if (this.status === 200) {
-
-                let json = JSON.parse(this.responseText)
-                let articles = json.articles;
-                console.log(articles);
-
-                let newshtml = '';
-                articles.forEach(function (element, index) {
-                    let news = `<div class="col mb-4">
-            <div class="card" id='card'>
-              <img src="${element.urlToImage}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">${element.title}</h5>
-                <p class="card-text">${element.content}</p>
-                <a href="${element.url}" target='_blank' class="btn btn-primary">Read more...</a>
-                </div>
-            
-              </div>
-          </div>`
-
-                    newshtml += news;
-                });
-                newsAccordian.innerHTML = newshtml;
-            }
-            else {
-                console.log('some error occured');
-            }
-        }
-        xhr.send()
-
-    </script>
 </body>
 
 </html>
