@@ -1,9 +1,14 @@
-function run() {
-  var news=document.getElementById('news').value;
-}
-
-let source=`${news}`;
-console.log(source);
+// google-news-in
+// bbc-news
+// news24
+// the-times-of-india
+// the-hindu
+// cnn
+// techradar
+// techcrunch
+// the-economist
+// the-new-york-times
+let source=`google-news-in`;
 
 let apikey='8cb0f8f82d0045e2b96123e00715f730'
 
