@@ -1,29 +1,31 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 
     <title>Live News</title>
-  </head>
-  <style>
-  body{
+</head>
+<style>
+    body {
         font-family: cursive;
     }
-  .nav-link {
-      font-size: 17px;
-      font-family: cursive;
-      text-align: center;
+
+    .nav-link {
+        font-size: 17px;
+        font-family: cursive;
+        text-align: center;
     }
+</style>
 
-
-  </style>
-  <body>
+<body>
     <nav class="navbar navbar-expand-lg navbar-dark" style="background: #6D4892;">
         <a class="navbar-brand" href="#">
             <img src="home.jpg" alt="Logo" style="width:40px;border-radius: 50%;">
@@ -56,23 +58,72 @@
             </form>
         </div>
     </nav>
-<div class="container">
-    <h4 class="my-3">Live-News<span class="badge bad6D4892ary mx-2">by top news </span></h4>
-    <hr>
-    <div class="row row-cols-1 row-cols-md-2" id="accordionExample">
+    <div class="container">
+        <h4 class="my-3">Live-News<span class="badge bad6D4892ary mx-2">by top news </span></h4>
+        <hr>
+        <div class="row row-cols-1 row-cols-md-2" id="accordionExample">
+        </div>
+
     </div>
-    
-</div>
-<footer class="footer">
-    <div class="footer-copyright text-center py-3" style="background: #6D4892;">© 2020 Copyright:
-        <a href="https://mdbootstrap.com/">LiveJS news</a>
-      </div>
-  </footer>
+    <footer class="footer">
+        <div class="footer-copyright text-center py-3" style="background: #6D4892;">© 2020 Copyright:
+            <a href="https://mdbootstrap.com/">LiveJS news</a>
+        </div>
+    </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <!-- <script src="index.js"></script> -->
+    <script>
+        let source = `google-news-in`;
+
+        let apikey = '8cb0f8f82d0045e2b96123e00715f730'
+
+        let newsAccordian = document.getElementById('accordionExample');
+        let card = document.getElementById('card')
+        const xhr = new XMLHttpRequest();
+
+        xhr.open('GET', `http://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${apikey}`, true)
+        xhr.onload = function () {
+            if (this.status === 200) {
+
+                let json = JSON.parse(this.responseText)
+                let articles = json.articles;
+                console.log(articles);
+
+                let newshtml = '';
+                articles.forEach(function (element, index) {
+                    let news = `<div class="col mb-4">
+            <div class="card" id='card'>
+              <img src="${element.urlToImage}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">${element.title}</h5>
+                <p class="card-text">${element.content}</p>
+                <a href="${element.url}" target='_blank' class="btn btn-primary">Read more...</a>
+                </div>
+            
+              </div>
+          </div>`
+
+                    newshtml += news;
+                });
+                newsAccordian.innerHTML = newshtml;
+            }
+            else {
+                console.log('some error occured');
+            }
+        }
+        xhr.send()
+
+    </script>
 </body>
+
 </html>
