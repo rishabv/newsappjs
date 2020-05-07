@@ -9,4 +9,4 @@ news API has been used as News source
   change the value of source variable
   alternative news source are commented in the code
 # Demo:
-  
+  ![](images/newsapp.jpg)
