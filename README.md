@@ -1,4 +1,6 @@
 "NewsAppJs"
+# Demo:
+  ![](images/newsapp.jpg)
 
 news API has been used as News source
 # To Run the app:
@@ -8,5 +10,3 @@ news API has been used as News source
   go to the index.js file 
   change the value of source variable
   alternative news source are commented in the code
-# Demo:
-  ![](images/newsapp.jpg)
