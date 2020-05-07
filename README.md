@@ -1,5 +1,6 @@
-"newsappjs" 
-#news APi has been used as News source
+"NewsAppJs"
+
+news API has been used as News source
 # To Run the app:
   simply open index.html in browser
   make sure you have an active internet connection
